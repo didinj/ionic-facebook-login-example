@@ -1,33 +1,29 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>
-      Ionic Facebook
-    </ion-title>
+    <ion-title>Facebook Login</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <div class="ion-padding" *ngIf="isLoggedIn === true">
+<ion-content class="ion-padding">
+  <div *ngIf="!isLoggedIn">
+    <ion-button expand="full" color="primary" (click)="fbLogin()">
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>
+      Login with Facebook
+    </ion-button>
+  </div>
+
+  <div *ngIf="isLoggedIn">
     <ion-card>
+      <img [src]="user.picture.data.url" alt="{{ user.name }}" />
       <ion-card-header>
-        <ion-card-subtitle>Hi, {{users.name}}</ion-card-subtitle>
-        <ion-card-title>{{users.email}}</ion-card-title>
+        <ion-card-title>{{ user.name }}</ion-card-title>
+        <ion-card-subtitle>{{ user.email }}</ion-card-subtitle>
       </ion-card-header>
-      <img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" />
       <ion-card-content>
-        <p>
-          <ion-button expand="full" color="secondary" (click)="logout()">
-            Logout
-            <ion-icon name="log-out"></ion-icon>
-          </ion-button>
-        </p>
+        <ion-button expand="full" color="secondary" (click)="logout()">
+          Logout
+        </ion-button>
       </ion-card-content>
     </ion-card>
-  </div>
-  <div class="ion-padding" *ngIf="isLoggedIn === false">
-    <ion-button expand="full" color="primary" (click)="fbLogin()">
-      Login with
-      <ion-icon name="logo-facebook"></ion-icon>
-    </ion-button>
   </div>
 </ion-content>
